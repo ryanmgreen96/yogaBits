@@ -658,7 +658,6 @@
       const orderedPages = getOrderedPages(pageRows);
       let pageNames = orderedPages.map((r) => r.name);
       pageNames = pageNames.filter(n => n !== 'Now');
-      if (!pageNames.includes('Lists')) pageNames.push('Lists');
       if (!pageNames.includes(PAGE)) {
         PAGE = pageNames[0];
       }
@@ -696,10 +695,6 @@
 
     async function loadPageItems() {
       console.log("Loading page items for:", PAGE);
-      if (PAGE === 'Lists') {
-        await loadListsPage();
-        return;
-      }
       columnsDiv.innerHTML = "";
       itemButtons.clear();
       const q = query(collection(db, NOTES_COLLECTION), where("page","==", PAGE));
